@@ -1,0 +1,73 @@
+var _user$project$Counters$init = F2(
+	function (top, bottom) {
+		return {
+			topCounter: _user$project$Counter$init(top),
+			bottomCounter: _user$project$Counter$init(bottom)
+		};
+	});
+var _user$project$Counters$update = F2(
+	function (message, model) {
+		var _p0 = message;
+		switch (_p0.ctor) {
+			case 'Reset':
+				return A2(_user$project$Counters$init, 0, 0);
+			case 'Top':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						topCounter: A2(_user$project$Counter$update, _p0._0, model.topCounter)
+					});
+			default:
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						bottomCounter: A2(_user$project$Counter$update, _p0._0, model.bottomCounter)
+					});
+		}
+	});
+var _user$project$Counters$Model = F2(
+	function (a, b) {
+		return {topCounter: a, bottomCounter: b};
+	});
+var _user$project$Counters$Bottom = function (a) {
+	return {ctor: 'Bottom', _0: a};
+};
+var _user$project$Counters$Top = function (a) {
+	return {ctor: 'Top', _0: a};
+};
+var _user$project$Counters$Reset = {ctor: 'Reset'};
+var _user$project$Counters$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html_App$map,
+				_user$project$Counters$Top,
+				_user$project$Counter$view(model.topCounter)),
+				A2(
+				_elm_lang$html$Html_App$map,
+				_user$project$Counters$Bottom,
+				_user$project$Counter$view(model.bottomCounter)),
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Events$onClick(_user$project$Counters$Reset)
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('RESET')
+					]))
+			]));
+};
+var _user$project$Counters$main = {
+	main: _elm_lang$html$Html_App$beginnerProgram(
+		{
+			model: A2(_user$project$Counters$init, 0, 0),
+			update: _user$project$Counters$update,
+			view: _user$project$Counters$view
+		})
+};
